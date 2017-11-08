@@ -285,12 +285,15 @@ app.controller('adminCtrl', function($scope, $rootScope, $http, $mdDialog, mdDia
         console.log(campanas);
         Campana.crear(campanas).then(function(data) {
             console.log(data);
+            alertas.mostrarToastEstandar("Nuevo Programa Creado");
             $scope.campanas.push(data.data.nombre);
+            $scope.$digest();
+
         })
 
     }
 
-    $scope.eliminarCampana = function(id) {
+    $scope.eliminarCampana = function(id, $index) {
 
         var idCampana = $stateParams.idCampana;
 
@@ -299,6 +302,8 @@ app.controller('adminCtrl', function($scope, $rootScope, $http, $mdDialog, mdDia
         $mdDialog.show(ventana).then(function() {
 
             Campana.eliminar(idCampana).then(function(data) {
+                $scope.campanas.splice($index, 1)
+                $scope.$digest();
                 $state.go('campanas');
             })
 
@@ -445,9 +450,12 @@ app.controller('adminCtrl', function($scope, $rootScope, $http, $mdDialog, mdDia
 
     $scope.editarCampana = function(data) {
 
+        console.log(data);
         Campana.editar(data).then(function(data) {
+            alertas.mostrarToastEstandar("Programa Editado Correctamente");
             console.log(data);
             $scope.campanas.push(data.nombre);
+            $scope.$digest();
         })
 
         $state.go('campanas');
