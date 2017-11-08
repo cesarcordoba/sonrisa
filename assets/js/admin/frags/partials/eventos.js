@@ -69,3 +69,4 @@ app.controller('eventosCtrl', function($scope, $state, $rootScope, $timeout, $st
        }
 
 });
+
