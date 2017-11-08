@@ -5,21 +5,21 @@ section.imagenes
     md-card
         md-grid-list(md-cols="4" md-row-height="200px")
             md-grid-tile(md-colspan="2" md-rowspan="2")
-                form(ng-submit="crearImagen(outputImage, proyecto)") 
-                    .dropify-container(ng-init="Dropify()" ng-hide="outputImage")
-                        input.dropify(type="file" data-default-file="Imagen del producto" ng-model="outputImage" base-sixty-four-input maxsize="5120" data-max-file-size="1000K" accept="image/*" style="padding:0px;")
-                    .croppie-container(ng-if="outputImage")
+                form(ng-submit="crearImagen(imagen, proyecto)") 
+                    .dropify-container(ng-init="Dropify()" flex ng-hide="inputImage")
+                        input.dropify(type="file" data-default-file="Imagen de la imagenes" ng-model="imagen.imagen" base-sixty-four-input maxsize="5120" data-max-file-size="1000K" accept="image/*" style="padding:0px;")
+                    .croppie-container(flex ng-show="inputImage")
                         ng-croppie(src="inputImage"
-                            ng-model='outputImage'
+                            ng-model='imagen.imagen'
                             update='onUpdate'
-                            boundry="{w: 300, h: 300}"
-                            viewport="{w: 150, h: 100}"
+                            boundry="{ w: 300, h: 300 }"
+                             viewport="{w: 150, h: 100}"
                             mousezoom="true" 
                             zoom="true" 
                             orientation="90"
-                            type="square")
+                            type="square") 
                     md-button(md-colors="{background: 'green'}" type="submit")
-                        md-icon keyboard_tab
+                        md-icon save
             md-grid-tile(md-colspan="1" md-rowspan="1" ng-repeat="imagen in imagenes" style="background-image:url({{imagen.imagen}})")
                 md-grid-tile-footer(layout-align="center center")
                     md-button(ng-click="eliminarImagen($index, imagen.id)")
