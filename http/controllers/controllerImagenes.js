@@ -126,3 +126,28 @@ ex.read = function (req, res, next) {
                 });
     }
 };
+
+ex.crearPortada = function(req, res, next){
+    var id = req.params.IdImagen;
+
+    imagenes.findById(id).then(function(imagenes){
+        imagenes.update({portada:'1'}).then(function(imagenes){
+            res.status(200).jsonp(imagenes);
+        });
+    });
+};
+ex.borrarPortada = function(req, res, next){
+    var IdProyecto = req.params.IdProyecto;
+
+    var busca = {
+        where: {
+            $or:[{id_pendiente: IdProyecto}, {id_progreso: IdProyecto}, {id_terminado: IdProyecto}]
+        }
+    }
+    imagenes.findAll(busca).then(function(imagenes){
+        imagenes.forEach(imagen => imagen.update({portada:'0'}))
+        }).then(function(imagenes){
+            res.status(200).jsonp(imagenes);
+});
+};
+
