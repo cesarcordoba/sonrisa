@@ -1,6 +1,6 @@
 var app = angular.module('myapp');
 
-app.controller('imagenesCtrl', function($scope, $stateParams, $mdDialog, Imagen) {
+app.controller('imagenesCtrl', function($scope, $stateParams, $mdDialog, Imagen, alertas) {
 
     $scope.seccion = 'imagenes';
 
@@ -12,7 +12,7 @@ app.controller('imagenesCtrl', function($scope, $stateParams, $mdDialog, Imagen)
 
     })
 
-    $scope.crearImagen = function(foto, proyecto) {
+    $scope.crearImagen = function(imagen, proyecto) {
 
         switch (proyecto.status_actual) {
             case 1:
@@ -30,14 +30,15 @@ app.controller('imagenesCtrl', function($scope, $stateParams, $mdDialog, Imagen)
             default:
         }
 
-        console.log(foto);
+        console.log(imagen);
 
-        let imagen = 'data:image/png;base64, ' + foto.base64;
+        //let imagen = 'data:image/png;base64, ' + foto.base64;
 
         Imagen.crear(ruta, IdStatus, imagen).then(function(data) {
             console.log(data);
             $scope.imagenes.push(data.data.imagen);
             $scope.$digest();
+
 
         })
 
@@ -62,7 +63,16 @@ app.controller('imagenesCtrl', function($scope, $stateParams, $mdDialog, Imagen)
     $scope.cambiarPortada = function(id) {
         var idProyecto = $stateParams.idProyecto;
 
-        Imagen.portada(id, idProyecto)
+        Imagen.portadaBorrar(id, idProyecto).then(function(data){
+
+            Imagen.portadaCrear(id, idProyecto).then(function(data){
+                alertas.mostrarToastEstandar("Se cambio la Portada");
+
+            })
+
+        })
+
+
 
     }
 
