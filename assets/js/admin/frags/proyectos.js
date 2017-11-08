@@ -153,3 +153,4 @@ app.controller('proyectosCtrl', function($scope, $rootScope, $state, $stateParam
     }
 
 });
+
