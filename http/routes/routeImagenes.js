@@ -20,6 +20,10 @@ routeImagenes.route('/data/imagenesconterminado/:IdTerminado')
 routeImagenes.route('/data/imagenesProyectosStatus/:IdProyecto/:IdStatus')
         .get(x.imagenesProyectosStatus);
 
+routeImagenes.route('/data/portada/:IdImagen/:IdProyecto')
+        .post(x.borrarPortada)
+	.put(x.crearPortada);
+
 routeImagenes.route('/data/imagenes/:id')
         .get(x.read)
         .put(x.update)
