@@ -63,3 +63,4 @@ app.controller('ubicacionesCtrl', function($scope, $stateParams, Ubicacion) {
 
 
 });
+
