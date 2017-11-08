@@ -9,7 +9,7 @@ app.service('Proyectos', function($http, alertas) {
 });
 
 app.service('ProyectosPendientes', function($http, alertas, $q) {
-    this.obtener = function(id) { return axios('/data/proyecto/pendiente/' + id) }
+    this.obtener = function(id) { returnaxios('/data/proyecto/pendiente/' + id) }
 });
 
 app.service('ProyectosProgreso', function($http, alertas, $q) {
@@ -21,20 +21,19 @@ app.service('ProyectosTerminado', function($http, alertas, $q) {
 });
 
 app.service('Imagen', function($http, alertas, $q) {
-    this.crear = function(ruta, status, imagen) { return axios.post('data/' + ruta + '/' + status, {'imagen': imagen}) }
+    this.crear = function(ruta, status, imagen) { return axios.post('data/' + ruta + '/' + status, imagen) }
     this.eliminar = function(id) { return axios.delete('/data/imagenes/' + id) }
     this.obtenerStatus = function(proyecto, status) { return axios('data/imagenesProyectosStatus/' + proyecto + '/' + status) }
-    this.portada = function(id,idProyecto){
-        axios.put('/data/portada/' + id + '/' + idProyecto)
-        return  axios.post('/data/portada/' + id + '/' + idProyecto)
-    }
+    this.portadaBorrar = function(id,idProyecto) { return axios.post('/data/portada/' + id + '/' + idProyecto) }
+    this.portadaCrear = function(id,idProyecto) { return axios.put('/data/portada/' + id + '/' + idProyecto) }
 });
 
 app.service('Campana', function($http, alertas, $q) {
     this.unir = function(campana, proyecto) { return axios.post('/data/campanas/' + campana + '/' + proyecto) }
     this.crear = function(data, callback) { return axios.post('/data/campanas', data) }
-    this.editar = function(campana) { return axios.put('/data/campanas/' + id, campana) }
+    this.editar = function(campana) { return axios.put('/data/campanas/' + campana.id, campana) }
     this.obtenerOne = function(id) { return axios('/data/campanas/' + id) }
+    this.eliminar = function(id) { return axios.delete('/data/campanas/' + id) }
     this.obtenerCampana = function(id) { return axios('/data/campanas') }
 });
 
@@ -50,6 +49,8 @@ app.service('Area', function($http, alertas, $q) {
     this.obtenerLite = function() { return axios('/data/areasLite') }
     this.obtener = function() { return axios('/data/areas') }
     this.unir = function(area, proyecto) { return axios.post('/data/areas/' + area + '/' + proyecto) }
+    this.eliminar = function(id) { return axios.delete('/data/areas/' + id) }
+
 });
 
 app.service('Ubicacion', function($http, alertas, $q) {
