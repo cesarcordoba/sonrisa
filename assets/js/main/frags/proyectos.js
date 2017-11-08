@@ -12,9 +12,7 @@ app.controller('proyectosCtrl', function($scope, $state, $rootScope, $http, mdDi
     $scope.loadingTerminados = true;
 
     Proyectos.obtenerTodosLite().then(data => {
-        console.log(data)
-        $scope.proyectos = data.data;
-        $scope.$digest();
+        $scope.proyectos = data;
     })
 
     $scope.loadingArea = true;
