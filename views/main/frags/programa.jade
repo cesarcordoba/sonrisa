@@ -1,5 +1,5 @@
 md-card(ng-init="obtenerCampana()")
+    
     h1 {{campana.nombre}}
-    h2 {{campana.id}}
     h3 {{campana.descripcion}}
-    h4 {{campana.fecha}}
+    h4 {{campana.fecha | date: "MM/dd/yyyy"}}
